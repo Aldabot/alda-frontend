@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import { DatePicker } from 'antd';
 import './App.css';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
           >
             Learn React
           </a>
+          <DatePicker />
         </header>
       </div>
     );
