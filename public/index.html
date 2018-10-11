@@ -25,6 +25,30 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <script>
+     window.fbAsyncInit = function() {
+       FB.init({
+         appId            : '598231856876775',
+         autoLogAppEvents : true,
+         xfbml            : true,
+         version          : 'v3.1'
+       });
+
+       FB.Event.subscribe('send_to_messenger', function(e) {
+         // callback for events triggered by the plugin
+         console.log('signin response', e)
+       });
+     };
+
+     (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.
