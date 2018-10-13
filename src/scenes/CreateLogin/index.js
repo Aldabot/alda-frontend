@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { Button, message } from 'antd';
-import BankList from './components/BankList'
-import BankLoginForm from './components/BankLoginForm'
+import ProviderList from './components/ProviderList'
+import ProviderLoginForm from './components/ProviderLoginForm'
 
 class CreateLogin extends Component {
   state = {
     current: 0,
-    bank: null
+    provider: null
   }
 
-  selectBank = (bank) => this.setState({ bank, current: 1 })
+  selectProvider = (provider) => this.setState({ provider, current: 1 })
 
   next() {
     const current = this.state.current + 1;
@@ -22,14 +22,14 @@ class CreateLogin extends Component {
   }
 
   render() {
-    const { current, bank } = this.state;
+    const { current, provider } = this.state;
 
     const steps = [{
       title: 'First',
-      content: <BankList selectBank={this.selectBank}/>,
+      content: <ProviderList selectProvider={this.selectProvider}/>,
     }, {
       title: 'Second',
-      content: <BankLoginForm bank={bank}/>,
+      content: <ProviderLoginForm provider={provider}/>,
     }, {
       title: 'Last',
       content: 'Last-content',

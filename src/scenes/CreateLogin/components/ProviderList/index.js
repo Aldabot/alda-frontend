@@ -1,27 +1,17 @@
 import React from 'react'
 import { Button, List, Card } from 'antd'
 
-const bankList = (props) => {
-  const { selectBank } = props
+const providerList = (props) => {
+  const { selectProvider } = props
 
   const data = [
     {
       name: 'Banco Sabadell',
+      providerCode: 'sabadell_es',
     },
     {
       name: 'La Caixa',
-    },
-    {
-      name: 'Title 3',
-    },
-    {
-      name: 'Title 4',
-    },
-    {
-      name: 'Title 5',
-    },
-    {
-      name: 'Title 6',
+      providerCode: 'la_caixa_es',
     },
   ];
 
@@ -32,7 +22,7 @@ const bankList = (props) => {
       renderItem={item => (
         <List.Item style={{ marginBottom: 4 }}>
           <Card title={item.name}>
-            <Button type="primary" onClick={() => selectBank(item)}>Select</Button>
+            <Button type="primary" onClick={() => selectProvider(item)}>Select</Button>
           </Card>
         </List.Item>
       )}
@@ -40,4 +30,4 @@ const bankList = (props) => {
   )
 }
 
-export default bankList
+export default providerList

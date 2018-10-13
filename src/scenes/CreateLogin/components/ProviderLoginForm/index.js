@@ -3,7 +3,7 @@ import { Form, Icon, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
 
-class BankLoginForm extends Component {
+class ProviderLoginForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -16,7 +16,7 @@ class BankLoginForm extends Component {
   render() {
     const {
       form: { getFieldDecorator },
-      bank: { name }
+      provider: { name }
     } = this.props;
 
     return (
@@ -27,14 +27,21 @@ class BankLoginForm extends Component {
             {getFieldDecorator('userName', {
                rules: [{ required: true, message: 'Please input your username!' }],
             })(
-               <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+               <Input
+                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                 placeholder="Username"
+               />
              )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
                rules: [{ required: true, message: 'Please input your Password!' }],
             })(
-               <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+               <Input
+                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                 type="password"
+                 placeholder="Password"
+               />
              )}
           </FormItem>
           <FormItem>
@@ -48,4 +55,4 @@ class BankLoginForm extends Component {
   }
 }
 
-export default Form.create()(BankLoginForm)
+export default Form.create()(ProviderLoginForm)

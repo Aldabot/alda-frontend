@@ -3,6 +3,7 @@ import authenticator from './services/authenticator'
 import CreateLogin from './scenes/CreateLogin'
 import './App.css'
 
+
 class App extends Component {
   render() {
     return (
@@ -18,4 +19,4 @@ class App extends Component {
   }
 }
 
-export default authenticator(App);
+export default authenticator(App)
