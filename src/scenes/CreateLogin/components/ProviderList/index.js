@@ -7,11 +7,11 @@ const providerList = (props) => {
   const data = [
     {
       name: 'Banco Sabadell',
-      providerCode: 'sabadell_es',
+      code: 'sabadell_es',
     },
     {
       name: 'La Caixa',
-      providerCode: 'la_caixa_es',
+      code: 'la_caixa_es',
     },
   ];
 

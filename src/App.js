@@ -6,13 +6,11 @@ import './App.css'
 
 class App extends Component {
   render() {
+    const { psid } = this.props
     return (
       <div className="App">
         <header className="App-header">
-          <p>
-            {this.props.psid}
-          </p>
-          <CreateLogin />
+          <CreateLogin psid={psid} />
         </header>
       </div>
     );

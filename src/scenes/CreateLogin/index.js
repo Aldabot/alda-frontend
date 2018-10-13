@@ -22,14 +22,15 @@ class CreateLogin extends Component {
   }
 
   render() {
-    const { current, provider } = this.state;
+    const { psid } = this.props
+    const { current, provider} = this.state;
 
     const steps = [{
       title: 'First',
-      content: <ProviderList selectProvider={this.selectProvider}/>,
+      content: <ProviderList selectProvider={this.selectProvider} />,
     }, {
       title: 'Second',
-      content: <ProviderLoginForm provider={provider}/>,
+      content: <ProviderLoginForm provider={provider} psid={psid} />,
     }, {
       title: 'Last',
       content: 'Last-content',

@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Form, Icon, Input, Button } from 'antd';
+import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
+import { compose } from 'recompose'
 
 const FormItem = Form.Item;
 
@@ -7,16 +10,32 @@ class ProviderLoginForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
+      const {
+        createUser,
+        createSaltedgeCustomer,
+        createSaltedgeLogin
+      } = this.props
+
+      if (err)
+        return null
+
+      createUser()
+          .then(_ => createSaltedgeCustomer())
+          .then(_ => createSaltedgeLogin({
+            variables: {
+              ...values
+            }
+          })).then(res => console.log('ok', res)).catch(err => console.log(err))
+
+
+      /* this.props.mutate().then(res => console.log(res)).catch(err => console.error(err)) */
     });
   }
 
   render() {
     const {
       form: { getFieldDecorator },
-      provider: { name }
+      provider: { name },
     } = this.props;
 
     return (
@@ -24,7 +43,7 @@ class ProviderLoginForm extends Component {
         <h2>{name}</h2>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <FormItem>
-            {getFieldDecorator('userName', {
+            {getFieldDecorator('username', {
                rules: [{ required: true, message: 'Please input your username!' }],
             })(
                <Input
@@ -55,4 +74,63 @@ class ProviderLoginForm extends Component {
   }
 }
 
-export default Form.create()(ProviderLoginForm)
+const CREATE_USER = gql`
+  mutation ( $psid: String! ) {
+    createUser( psid: $psid ) {
+      id
+    }
+  }
+`
+const CREATE_SALTEDGE_CUSTOMER = gql`
+  mutation ( $psid: String! ) {
+    createSaltedgeCustomer( psid: $psid ) {
+      id
+    }
+  }
+`
+const CREATE_SALTEDGE_LOGIN = gql`
+  mutation (
+    $psid: String!
+    $username: String!
+    $password: String!
+    $provider: String!
+  ) {
+    createSaltedgeLogin(
+      psid: $psid
+      username: $username
+      password: $password
+      provider: $provider
+    ) {
+      id
+    }
+  }
+`
+
+export default compose(
+  Form.create(),
+  graphql(CREATE_USER, {
+    name: 'createUser',
+    options: (props) => ({
+      variables: {
+        psid: props.psid
+      }
+    })
+  }),
+  graphql(CREATE_SALTEDGE_CUSTOMER, {
+    name: 'createSaltedgeCustomer',
+    options: (props) => ({
+      variables: {
+        psid: props.psid
+      }
+    })
+  }),
+  graphql(CREATE_SALTEDGE_LOGIN, {
+    name: 'createSaltedgeLogin',
+    options: (props) => ({
+      variables: {
+        psid: props.psid,
+        provider: props.provider.code
+      }
+    })
+  })
+)(ProviderLoginForm)
