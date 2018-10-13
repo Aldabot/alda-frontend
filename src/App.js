@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import authenticator from './services/authenticator'
+import CreateLogin from './scenes/CreateLogin'
 import './App.css'
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
           <p>
             {this.props.psid}
           </p>
+          <CreateLogin />
         </header>
       </div>
     );
