@@ -10,22 +10,16 @@ class ProviderLoginForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      const {
-        createUser,
-        createSaltedgeCustomer,
-        createSaltedgeLogin
-      } = this.props
+      const { createSaltedgeLogin } = this.props
 
       if (err)
         return null
 
-      createUser()
-          .then(_ => createSaltedgeCustomer())
-          .then(_ => createSaltedgeLogin({
-            variables: {
-              ...values
-            }
-          })).then(res => console.log('ok', res)).catch(err => console.log(err))
+      createSaltedgeLogin({
+        variables: {
+          ...values
+        }
+      }).then(res => console.log('ok', res)).catch(err => console.log(err))
 
 
       /* this.props.mutate().then(res => console.log(res)).catch(err => console.error(err)) */
@@ -74,20 +68,6 @@ class ProviderLoginForm extends Component {
   }
 }
 
-const CREATE_USER = gql`
-  mutation ( $psid: String! ) {
-    createUser( psid: $psid ) {
-      id
-    }
-  }
-`
-const CREATE_SALTEDGE_CUSTOMER = gql`
-  mutation ( $psid: String! ) {
-    createSaltedgeCustomer( psid: $psid ) {
-      id
-    }
-  }
-`
 const CREATE_SALTEDGE_LOGIN = gql`
   mutation (
     $psid: String!
@@ -108,22 +88,6 @@ const CREATE_SALTEDGE_LOGIN = gql`
 
 export default compose(
   Form.create(),
-  graphql(CREATE_USER, {
-    name: 'createUser',
-    options: (props) => ({
-      variables: {
-        psid: props.psid
-      }
-    })
-  }),
-  graphql(CREATE_SALTEDGE_CUSTOMER, {
-    name: 'createSaltedgeCustomer',
-    options: (props) => ({
-      variables: {
-        psid: props.psid
-      }
-    })
-  }),
   graphql(CREATE_SALTEDGE_LOGIN, {
     name: 'createSaltedgeLogin',
     options: (props) => ({

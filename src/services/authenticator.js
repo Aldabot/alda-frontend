@@ -47,7 +47,7 @@ const authenticator = (WrappedComponent) => {
         return (<div>Loading...</div>)
 
       return (
-        <WrappedComponent psid={this.state.psid} />
+        <WrappedComponent psid={this.state.psid} {...this.props} />
       )
     }
   }
