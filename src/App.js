@@ -10,6 +10,7 @@ import './App.css'
 
 class App extends Component {
   componentDidMount() {
+    console.log(this.props)
     this.props.createSaltedgeCustomer().then(res => console.log('succ', res)).catch(err => console.error(err))
   }
 

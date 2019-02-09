@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.css';
 
 const client = new ApolloClient({
-  uri: 'https://uwl3s322de.execute-api.eu-west-1.amazonaws.com/dev'
+  uri: 'http://localhost:4000/graphqlServer'
 })
 
 ReactDOM.render(

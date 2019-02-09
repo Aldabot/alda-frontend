@@ -19,7 +19,13 @@ class ProviderLoginForm extends Component {
         variables: {
           ...values
         }
-      }).then(res => console.log('ok', res)).catch(err => console.log(err))
+      }).then(res => {
+        console.log('testres', res)
+        const loginId = res.data.createSaltedgeLogin.loginId
+        console.log(loginId)
+        this.props.loginToProvider(loginId)
+      }).catch(err => console.log(err))
+
 
 
       /* this.props.mutate().then(res => console.log(res)).catch(err => console.error(err)) */
@@ -81,6 +87,7 @@ const CREATE_SALTEDGE_LOGIN = gql`
       password: $password
       provider: $provider
     ) {
+      loginId
       id
     }
   }

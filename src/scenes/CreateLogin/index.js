@@ -2,21 +2,26 @@ import React, { Component } from 'react'
 import { Button, message } from 'antd';
 import ProviderList from './components/ProviderList'
 import ProviderLoginForm from './components/ProviderLoginForm'
+import ChkLoginStatus from './components/ChkLoginStatus'
+
 
 class CreateLogin extends Component {
   state = {
     current: 0,
-    provider: null
+    provider: null,
+    loginId: null
   }
 
   selectProvider = (provider) => this.setState({ provider, current: 1 })
 
-  next() {
+  loginToProvider = (loginId) => this.setState({ loginId, current: 2 })
+
+  next = () => {
     const current = this.state.current + 1;
     this.setState({ current });
   }
 
-  prev() {
+  prev = () => {
     const current = this.state.current - 1;
     this.setState({ current });
   }
@@ -30,21 +35,21 @@ class CreateLogin extends Component {
       content: <ProviderList selectProvider={this.selectProvider} />,
     }, {
       title: 'Second',
-      content: <ProviderLoginForm provider={provider} psid={psid} />,
+      content: <ProviderLoginForm provider={provider} psid={psid} loginToProvider={this.loginToProvider}/>,
     }, {
       title: 'Last',
-      content: 'Last-content',
+      content: <ChkLoginStatus loginId={this.state.loginId}/>,
     }];
 
     return (
       <div>
         <div className="steps-action">
+          {/* { */}
+          {/*   current === steps.length - 1 */}
+          {/*   && <Button type="primary" onClick={() => message.success('Processing complete!')}>Done</Button> */}
+          {/* } */}
           {
-            current === steps.length - 1
-            && <Button type="primary" onClick={() => message.success('Processing complete!')}>Done</Button>
-          }
-          {
-            current > 0
+            current === 1
             && (
               <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
                 Previous
