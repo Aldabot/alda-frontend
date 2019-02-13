@@ -20,11 +20,9 @@ class ProviderLoginForm extends Component {
           ...values
         }
       }).then(res => {
-        console.log('testres', res)
         const loginId = res.data.createSaltedgeLogin.loginId
-        console.log(loginId)
         this.props.loginToProvider(loginId)
-      }).catch(err => console.log(err))
+      }).catch(err => console.log('Could not create Saltedge Login', err))
 
 
 

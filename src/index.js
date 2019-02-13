@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom';
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
@@ -7,8 +7,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.css';
 
+const graphqlEndpoint = "https:n5o6hyplo5.execute-api.eu-west-1.amazonaws.com/dev/graphqlServer"
+// const graphqlEndpoint = "http://localhost:4000/graphqlServer"
+
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphqlServer'
+  uri: graphqlEndpoint
 })
 
 ReactDOM.render(
