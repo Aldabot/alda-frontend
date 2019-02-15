@@ -17,9 +17,9 @@ class App extends Component {
     const { psid } = this.props
     return (
       <div className="App">
-        <header className="App-header">
+        <div className="Content">
           <CreateLogin psid={psid} />
-        </header>
+        </div>
       </div>
     );
   }

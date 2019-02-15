@@ -1,32 +1,42 @@
-import React from 'react'
-import { Button, List, Card } from 'antd'
+import React, { Fragment } from 'react'
+import { Button, Row, Col, Card } from 'antd'
+import bancoSabadell from './images/banco-sabadell.png'
+import laCaixa from './images/la-caixa.png'
 
 const providerList = (props) => {
   const { selectProvider } = props
 
-  const data = [
+  const banks = [
     {
       name: 'Banco Sabadell',
       code: 'sabadell_es',
+      img: bancoSabadell,
     },
     {
       name: 'La Caixa',
       code: 'la_caixa_es',
+      img: laCaixa,
     },
   ];
 
   return (
-    <List
-      grid={{ gutter: 6, column: 6, xs: 2, sm: 2, md: 3, lg: 4, xl: 6, xxl: 6 }}
-      dataSource={data}
-      renderItem={item => (
-        <List.Item style={{ marginBottom: 4 }}>
-          <Card title={item.name}>
-            <Button type="primary" onClick={() => selectProvider(item)}>Select</Button>
-          </Card>
-        </List.Item>
-      )}
-    />
+    <Fragment>
+      <h2>Vincula tu cuenta</h2>
+      <Row gutter={8} type="flex">
+        {banks.map(bank => (
+          <Col span={12}>
+            <Card
+              hoverable
+              onClick={() => selectProvider(bank)}
+              bordered={false}
+              style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 1px 1px 10px', height: '100%' }}
+            >
+              <img alt={bank.name} src={bank.img} style={{width: '100%'}} />
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Fragment>
   )
 }
 
